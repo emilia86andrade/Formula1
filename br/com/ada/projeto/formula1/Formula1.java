@@ -1,28 +1,16 @@
 package br.com.ada.projeto.formula1;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class Formula1 {
 
-    static ArrayList<Piloto> pilotos = new ArrayList<>();
-
     public static void main(String[] args) throws IOException {
 
-        Path path = Path.of("C:\\Formula1\\formula1.txt");
-
-        if(Files.notExists(path)) {
-            Files.createFile(path);
-        }
-
-
-
+        ArrayList<Piloto> pilotos = new ArrayList<Piloto>();
 
         var tempoDaPrimeiraVoltaPiloto1 = LocalTime.of(1, 30, 24);
         Piloto piloto1 = new Piloto.PilotoBuilder()
@@ -32,7 +20,6 @@ public class Formula1 {
                 .sexo(Sexo.FEMININO)
                 .nomeEquipe("Deva")
                 .criarPiloto();
-
 
         var tempoDaPrimeiraVoltaPiloto2 = LocalTime.of(1, 35, 41);
         Piloto piloto2 = new Piloto.PilotoBuilder()
@@ -52,19 +39,39 @@ public class Formula1 {
                 .nomeEquipe("BrasilCar")
                 .criarPiloto();
 
-
         pilotos.add(piloto1);
         pilotos.add(piloto2);
         pilotos.add(piloto3);
+
+        //criando arquivo txt com os objetos instanciados
+        File arquivo = new File("C:\\Formula1\\formula1.txt");
+        if(!arquivo.exists()){
+            arquivo.createNewFile();
+        }
+        FileWriter escreverNoArquivo = new FileWriter(arquivo);
+        for (Piloto p : pilotos){
+            escreverNoArquivo.write(p.getNomePiloto() + "|" +  p.getSexo() + "|" + p.getNumeroCarro() + "|" +
+                    p.getNomeEquipe() + "|" + p.getTempoPorVolta() + "\n");
+        }
+        escreverNoArquivo.flush();
+        escreverNoArquivo.close();
+
+//        verificacoes do arquivo
+        System.out.println("\n----Verificações----");
+        System.out.println("O arquivo existe: " + arquivo.exists());
+        System.out.println("O arquivo é um diretório: " + arquivo.isDirectory());
+        System.out.println("Tamanho do arquivo: " + arquivo.length());
+
+        //imprimindo os métodos stream
         ordenar(pilotos.stream());
         pesquisaPorNome(pilotos.stream());
     }
 
-        private static void ordenar(Stream<Piloto> streamPilotos) {
-            System.out.println("\n----Ordenar pelo número do carro----");
-            streamPilotos.sorted(Comparator.comparingInt(Piloto::getNumeroCarro))
-                    .forEach(System.out::println);
-        }
+    private static void ordenar(Stream<Piloto> streamPilotos) {
+        System.out.println("\n----Ordenar pelo número do carro----");
+        streamPilotos.sorted(Comparator.comparingInt(Piloto::getNumeroCarro))
+                .forEach(System.out::println);
+    }
 
     private static void pesquisaPorNome(Stream<Piloto> streamPilotos) {
         System.out.println("\n----Pesquisa por nome----");
@@ -72,5 +79,5 @@ public class Formula1 {
                 .forEach(System.out::println);
     }
 
-    }
+}
 
