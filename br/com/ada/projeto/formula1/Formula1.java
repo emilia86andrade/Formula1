@@ -45,18 +45,18 @@ public class Formula1 {
 
         //criando arquivo txt com os objetos instanciados
         File arquivo = new File("C:\\Formula1\\formula1.txt");
-        if(!arquivo.exists()){
+        if (!arquivo.exists()) {
             arquivo.createNewFile();
         }
         FileWriter escreverNoArquivo = new FileWriter(arquivo);
-        for (Piloto p : pilotos){
-            escreverNoArquivo.write(p.getNomePiloto() + "|" +  p.getSexo() + "|" + p.getNumeroCarro() + "|" +
+        for (Piloto p : pilotos) {
+            escreverNoArquivo.write(p.getNomePiloto() + "|" + p.getSexo() + "|" + p.getNumeroCarro() + "|" +
                     p.getNomeEquipe() + "|" + p.getTempoPorVolta() + "\n");
         }
         escreverNoArquivo.flush();
         escreverNoArquivo.close();
 
-//        verificacoes do arquivo
+        //verificacoes do arquivo
         System.out.println("\n----Verificações----");
         System.out.println("O arquivo existe: " + arquivo.exists());
         System.out.println("O arquivo é um diretório: " + arquivo.isDirectory());

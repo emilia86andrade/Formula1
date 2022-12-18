@@ -18,18 +18,20 @@ public class Piloto {
         this.tempoPorVolta = tempoPorVolta;
     }
 
-    public Piloto(){
+    public Piloto() {
     }
+
     @Override
     public String toString() {
         return
                 "Nome do Piloto = " + nomePiloto +
-                ", Número do Carro = " + numeroCarro +
-                ", Sexo = " + sexo +
-                ", Nome da Equipe = " + nomeEquipe +
-                ", Tempo Por Volta = " + tempoPorVolta;
+                        ", Número do Carro = " + numeroCarro +
+                        ", Sexo = " + sexo +
+                        ", Nome da Equipe = " + nomeEquipe +
+                        ", Tempo Por Volta = " + tempoPorVolta;
     }
-    public static class PilotoBuilder{
+
+    public static class PilotoBuilder {
         private String nomePiloto;
         private Integer numeroCarro;
         private Sexo sexo;
@@ -39,35 +41,36 @@ public class Piloto {
         public PilotoBuilder() {
         }
 
-        public PilotoBuilder nomePiloto (String nomePiloto){
+        public PilotoBuilder nomePiloto(String nomePiloto) {
             this.nomePiloto = nomePiloto;
             return this;
         }
 
-        public PilotoBuilder numeroCarro (Integer numeroCarro){
+        public PilotoBuilder numeroCarro(Integer numeroCarro) {
             this.numeroCarro = numeroCarro;
             return this;
         }
 
-        public PilotoBuilder sexo (Sexo sexo){
+        public PilotoBuilder sexo(Sexo sexo) {
             this.sexo = sexo;
             return this;
         }
 
-        public PilotoBuilder nomeEquipe (String nomeEquipe){
+        public PilotoBuilder nomeEquipe(String nomeEquipe) {
             this.nomeEquipe = nomeEquipe;
             return this;
         }
-        public PilotoBuilder tempoPorVolta (LocalTime tempoPorVolta){
+
+        public PilotoBuilder tempoPorVolta(LocalTime tempoPorVolta) {
             this.tempoPorVolta = tempoPorVolta;
             return this;
         }
 
-        public Piloto criarPiloto(){
+        public Piloto criarPiloto() {
             return new Piloto(nomePiloto, numeroCarro, sexo, nomeEquipe, tempoPorVolta);
         }
 
-     }
+    }
 
     public String getNomePiloto() {
         return nomePiloto;
